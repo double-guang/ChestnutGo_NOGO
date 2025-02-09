@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GameWidget</class>
+ <widget class="QWidget" name="GameWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>920</height>
+   </rect>
+  </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>NoGo</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#GameWidget
+{	
+	background-image: url(:/pic/QTNoGo.png);
+	background-color: rgb(40, 49, 73);
+}</string>
+  </property>
+  <widget class="QPushButton" name="ReturnPushButton">
+   <property name="geometry">
+    <rect>
+     <x>880</x>
+     <y>120</y>
+     <width>360</width>
+     <height>102</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(:/pic/Logo.png);
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="HintPushButton">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>460</y>
+     <width>90</width>
+     <height>90</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#HintPushButton
+{
+border-radius: 45;
+border-width: 15px; 
+border-style:solid;
+border-color:#FFDBE9;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="RestartPushButton">
+   <property name="geometry">
+    <rect>
+     <x>1110</x>
+     <y>460</y>
+     <width>90</width>
+     <height>90</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-radius: 45;
+border-width: 15px; 
+border-style:solid;
+border-color:#A67B8E;
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ReactPushButton">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>680</y>
+     <width>90</width>
+     <height>90</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-radius: 45;
+border-width: 15px; 
+border-style:solid;
+border-color:#FFDBE9;
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PausePushButton">
+   <property name="geometry">
+    <rect>
+     <x>1110</x>
+     <y>680</y>
+     <width>90</width>
+     <height>90</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-radius: 45;
+border-width: 15px; 
+border-style:solid;
+border-color:#A67B8E;
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="AIHintLabel">
+   <property name="geometry">
+    <rect>
+     <x>908</x>
+     <y>400</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(145,111,125);
+font: 28px 'Arial Rounded MT Bold'</string>
+   </property>
+   <property name="text">
+    <string>AI Hint</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>1105</x>
+     <y>400</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial Rounded MT Bold</family>
+     <pointsize>-1</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(145,111,125);
+font: 28px 'Arial Rounded MT Bold'</string>
+   </property>
+   <property name="text">
+    <string>Restart</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>917</x>
+     <y>630</y>
+     <width>73</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial Rounded MT Bold</family>
+     <pointsize>-1</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(145,111,125);
+font: 28px 'Arial Rounded MT Bold'</string>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="PauseLabel">
+   <property name="geometry">
+    <rect>
+     <x>1091</x>
+     <y>630</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial Rounded MT Bold</family>
+     <pointsize>-1</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(145,111,125);
+font: 28px 'Arial Rounded MT Bold'</string>
+   </property>
+   <property name="text">
+    <string>Pause</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="TimeBar">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>290</y>
+     <width>321</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QProgressBar
+{
+background:rgb(89, 68, 76);
+color:white;
+border-radius:8px;
+}
+QProgressBar::chunk
+{
+border-radius:8px;
+background-color:rgb(255, 229, 233);
+}
+</string>
+   </property>
+   <property name="maximum">
+    <number>1000</number>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+   <property name="textVisible">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <zorder>HintPushButton</zorder>
+  <zorder>RestartPushButton</zorder>
+  <zorder>ReactPushButton</zorder>
+  <zorder>PausePushButton</zorder>
+  <zorder>AIHintLabel</zorder>
+  <zorder>label_2</zorder>
+  <zorder>label_3</zorder>
+  <zorder>PauseLabel</zorder>
+  <zorder>TimeBar</zorder>
+  <zorder>ReturnPushButton</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
