@@ -15,20 +15,18 @@ board=np.zeros([9,9],dtype=int)
 
 def set_learning_rate(optimizer, lr):
     """Sets the learning rate to the given value"""
-    # 这个函数用于设置优化器的学习率，它遍历优化器的参数组，并将每个参数组的学习率设置为指定的值。
     for param_group in optimizer.param_groups:
         param_group["lr"] = lr
 
 
 class Residual(nn.Module):  # @save
-    # 这个类实现了一个残差块（Residual Block），其结构包括两个卷积层和批量归一化层
     def __init__(self, input_channels, num_channels, use_1x1conv=False, strides=1):
         super().__init__()
         self.conv1 = nn.Conv2d(
             input_channels, num_channels, kernel_size=3, padding=1, stride=strides
         )
         self.conv2 = nn.Conv2d(num_channels, num_channels, kernel_size=3, padding=1)
-        # 如果使用 1x1 卷积（use_1x1conv=True），则添加一个额外的卷积层
+
         if use_1x1conv:
             self.conv3 = nn.Conv2d(
                 input_channels, num_channels, kernel_size=1, stride=strides
@@ -38,7 +36,7 @@ class Residual(nn.Module):  # @save
         self.bn1 = nn.BatchNorm2d(num_channels)
         self.bn2 = nn.BatchNorm2d(num_channels)
 
-    # 前向传播中，通过添加输入和输出实现跳跃连接，从而缓解梯度消失问题
+
     def forward(self, X):
         Y = F.relu(self.bn1(self.conv1(X)))
         Y = self.bn2(self.conv2(Y))
@@ -49,23 +47,23 @@ class Residual(nn.Module):  # @save
 
 
 class Net(nn.Module):
-    # 这个类定义了整个围棋AI的神经网络模型
+
     def __init__(self, board_width, board_height):
         super(Net, self).__init__()
-        # 初始化时，定义了几个残差块（conv1、conv2、conv3）以及动作策略层（act_conv1、act_fc1）
+
         self.board_width = board_width
         self.board_height = board_height
-        # common layers
+
         self.conv1 = Residual(4, 32, use_1x1conv=True)
         self.conv2 = Residual(32, 64, use_1x1conv=True)
         self.conv3 = Residual(64, 128, use_1x1conv=True)
-        # action policy layers
+
         self.act_conv1 = Residual(128, 4, use_1x1conv=True)
         self.act_fc1 = nn.Linear(
             4 * board_width * board_height, board_width * board_height
         )
 
-    # 前向传播中，依次通过残差块处理输入状态，最后通过动作策略层计算动作概率
+
     def forward(self, state_input):
         x = self.conv1(state_input)
         x = self.conv2(x)
@@ -77,7 +75,7 @@ class Net(nn.Module):
 
 
 def get_board_state(game_history: list):
-    # 这个函数将游戏历史记录转换为神经网络的输入状态。state 是一个 4 维数组，表示棋盘的状态
+
     state = np.zeros(shape=(1, 4, 9, 9), dtype=np.float64)
     for idx, step in enumerate(game_history):
         state[0, idx % 2, step["y"], step["x"]] = 1
@@ -87,7 +85,7 @@ def get_board_state(game_history: list):
 
 
 def get_move_idx(move):
-    # 这个函数将一个移动（包含 x 和 y 坐标）转换为一个索引，用于在棋盘上的一维表示
+
     return move["y"] * 9 + move["x"]
 
 def dfs_air(x,y,col):
@@ -126,7 +124,7 @@ def judge(x,y,col):
 
 @torch.no_grad()
 def main(Json_str):
-    #print("Current working directory:", os.getcwd())
+
     print("test")
     file = "./model_29.pth"
     state_dict = torch.load(file, map_location=torch.device("cpu"))
@@ -134,7 +132,7 @@ def main(Json_str):
     model.load_state_dict(state_dict)
     model.eval()
 
-    #垃圾回收
+
     gc.collect()
 
     avaliables = set(range(9 * 9))
@@ -146,7 +144,7 @@ def main(Json_str):
 
     """
     history = []
-    # 输入
+
     print(Json_str)
     print(type(Json_str))
 
@@ -172,16 +170,11 @@ def main(Json_str):
     illegel_list = []
     for i in avaliables:
         flag=judge(i%9,i//9,Col)
-        # print(str(i)+' '+str(flag))
-        # print(board.T)
+
         if not flag:
             illegel_list.append(i)
     for i in illegel_list:
         avaliables.remove(i)
-        # print(str(i)+' is removed')
-
-    # for i in avaliables:
-    #     print(i)
 
     board_state = get_board_state(history)
     action_probs = model(board_state)
